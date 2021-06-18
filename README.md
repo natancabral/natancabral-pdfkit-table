@@ -1,6 +1,7 @@
 # natancabral-pdfkit-table
 
-#### Simple Array Table
+
+### Example 1 - Simple Array Table
 ```js
   // requires 
   const tableArray = {
@@ -15,7 +16,8 @@
   // end code
 ```
 
-#### Table
+
+### Example 2 - Table
 ```js
   // require
   // A4 595.28 x 841.89 (portrait) (about width sizes)
@@ -59,7 +61,8 @@
   });
 ```
 
-#### Full Code
+
+### Example 3 - Full Code
 ```js
   // require
   const fs = require("fs");
@@ -69,13 +72,6 @@
   });
 
   doc.pipe(fs.createWriteStream("./file-table.pdf"));
-
-  // code base
-  // https://www.andronio.me/2017/09/02/pdfkit-tables/
-  // idea
-  // https://github.com/foliojs/pdfkit/issues/29#issuecomment-56504943
-  // influency
-  // https://github.com/voilab/voilab-pdf-table
 
   // table code
 
@@ -96,3 +92,28 @@ view pdf example | clone a full code example
 *x*
 
 *y*
+
+## License
+
+The MIT License.
+
+## Author
+
+<table>
+  <tr>
+    <td>
+      <img src="https://github.com/natancabral.png?s=100" width="100"/>
+    </td>
+    <td>
+      Natan Cabral<br />
+      <a href="mailto:natancabral[.]hotmail.com">natancabral[.]hotmail.com</a><br />
+      <a href="https://github.com/natancabral/">https://github.com/natancabral/</a>
+    </td>
+  </tr>
+</table>
+
+## Thank you
+
+- code base - [andronio](https://www.andronio.me/2017/09/02/pdfkit-tables/)
+- ideas - [giuseppe-santoro](https://github.com/foliojs/pdfkit/issues/29#issuecomment-56504943)
+- influency [voilab](https://github.com/voilab/voilab-pdf-table)
