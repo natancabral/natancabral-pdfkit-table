@@ -1,6 +1,6 @@
 # natancabral-pdfkit-table
 
-Create a table using pdfkit. #server-side.
+Helps to draw informations in simple tables using pdfkit. #server-side.
 
 ## Examples
 
@@ -192,4 +192,4 @@ The MIT License.
 - pdfkit - [pdfkit](https://www.npmjs.com/package/pdfkit)
 - code base - [andronio](https://www.andronio.me/2017/09/02/pdfkit-tables/)
 - ideas - [giuseppe-santoro](https://github.com/foliojs/pdfkit/issues/29#issuecomment-56504943)
-- influency [voilab](https://github.com/voilab/voilab-pdf-table)
+- influence [voilab](https://github.com/voilab/voilab-pdf-table)
