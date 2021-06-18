@@ -83,17 +83,15 @@ view pdf example | clone a full code example
 
 ### Options
 
----------------------|-------------|
-| *Properties* | description |
----------------------|-------------|
-| *width*      | width of table    |
-| *x*          | position x (left) |
-| *y*          | position y (top)  |
-| *columnSpacing* | 5 |
-| *rowSpacing*    | 3 |
+| *Properties*       | description       |
+---------------------|-------------------|
+| *width*            | width of table    |
+| *x*                | position x (left) |
+| *y*                | position y (top)  |
+| *columnSpacing*    | 5 |
+| *rowSpacing*       | 3 |
 
 
----------------------|-------------|
 | *Functions*        | description |
 ---------------------|-------------|
 | prepareHeader      | prepareHeader: () => doc.font("Helvetica-Bold").fontSize(8) |
