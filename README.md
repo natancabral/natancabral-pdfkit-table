@@ -1,6 +1,6 @@
 # natancabral-pdfkit-table
 
-## Generate pdf tables with javascript (PDFKIT plugin)
+#### Generate pdf tables with javascript (PDFKIT plugin)
 Helps to draw informations in simple tables using pdfkit. #server-side.
 
 

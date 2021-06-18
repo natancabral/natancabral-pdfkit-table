@@ -1,6 +1,6 @@
 {
   "name": "natancabral-pdfkit-table",
-  "version": "0.0.63",
+  "version": "0.0.64",
   "description": "Create a pdf table with pdfkit on server side.",
   "main": "index.js",
   "scripts": {
