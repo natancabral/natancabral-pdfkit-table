@@ -99,6 +99,30 @@ npm install natancabral-pdfkit-table
   doc.end();
 ```
 
+## Table
+
+Example code:
+```js
+const table = {
+  // simple headers only with ROWS (not DATAS)  
+  headers: ['Name', 'Age'],
+  // complex headers work with ROWS and DATAS  
+  headers: [
+    { label:"Name", property: 'name', width: 100, renderer: null },
+    { label:"Age", property: 'age', width: 100, renderer: null },
+  ],
+  // simple content
+  rows: [
+    ['Jack', '32'], // row 1
+    ['Maria', '30'], // row 2
+  ]
+  // complex content
+  datas: [
+    { name: 'Jack', age: 32, },
+    // age is object value with style options
+    { name: 'Maria', age: { label: 30 , options: { fontSize: 12 }}, },
+  ],
+```
 
 ## Options
 
