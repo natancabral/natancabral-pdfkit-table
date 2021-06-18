@@ -2,7 +2,7 @@
 
 ## Examples
 
-[view pdf example](https://github.com/natancabral/natancabral-pdfkit-table/raw/main/document.pdf) | [full code example](https://raw.githubusercontent.com/natancabral/natancabral-pdfkit-table/main/example/index-server-example.js)
+[view pdf example](https://github.com/natancabral/natancabral-pdfkit-table/raw/main/document.pdf) | [full code example](https://github.com/natancabral/natancabral-pdfkit-table/blob/main/example/index-server-example.js)
 
 ### Start
 
