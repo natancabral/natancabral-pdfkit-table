@@ -83,7 +83,6 @@ view pdf example | clone a full code example
 
 ### Options
 
-| options |
 ---------------------|-------------|
 | *Properties* | description |
 ---------------------|-------------|
@@ -92,6 +91,7 @@ view pdf example | clone a full code example
 | *y*          | position y (top)  |
 | *columnSpacing* |   |
 | *rowSpacing*    |   |
+
 ---------------------|-------------|
 | *Functions* | description |
 ---------------------|-------------|
