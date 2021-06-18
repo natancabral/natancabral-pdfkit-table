@@ -1,6 +1,13 @@
 /**
- * You need install on terminal (node.js):
- * npm install express cors natancabral-pdfkit-table
+ * You need to install on terminal (node.js):
+ * -----------------------------------------------------
+ * $ npm install express cors natancabral-pdfkit-table
+ * -----------------------------------------------------
+ * Run this file:
+ * -----------------------------------------------------
+ * $ node index-server-example.js
+ * -----------------------------------------------------
+ * 
  */
 const express = require("express");
 const cors = require("cors");
