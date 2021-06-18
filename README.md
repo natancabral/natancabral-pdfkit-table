@@ -4,6 +4,23 @@
 
 [view pdf example](https://github.com/natancabral/natancabral-pdfkit-table/raw/main/document.pdf) | clone a full code example
 
+### Start
+
+```bash
+npm install natancabral-pdfkit-table
+```
+
+```js
+  const fs = require("fs");
+  const PDFDocument = require("natancabral-pdfkit-table");
+  const doc = new PDFDocument({ margin: 30, size: 'A4' });
+
+  // the magic:
+  doc.table( table, options );
+  //...
+
+```
+
 ### Example 1 - Simple Array Table
 ```js
   // requires 
@@ -94,13 +111,6 @@
 | *rowSpacing*       | 3 |
 
 
-| *Functions*        | description |
----------------------|-------------|
-| prepareHeader      | prepareHeader: () => doc.font("Helvetica-Bold").fontSize(8) |
-| prepareRow         | prepareRow: (row, i) => doc.font("Helvetica").fontSize(8) |
-
-
-
 ```js
 const options = {
   // properties
@@ -109,10 +119,9 @@ const options = {
   y: 500, // {Number} default: undefined
   columnSpacing: 5, // {Number} default: 5
   rowSpacing: 3, // {Number} default: 3
-  width: 500, // default: undefined
   // functions
-  prepareHeader: () => doc.font("Helvetica-Bold").fontSize(8),
-  prepareRow: (row, i) => doc.font("Helvetica").fontSize(8),
+  prepareHeader: () => doc.font("Helvetica-Bold").fontSize(8), // {Function} 
+  prepareRow: (row, i) => doc.font("Helvetica").fontSize(8), // {Function} 
 }
 ```
 
