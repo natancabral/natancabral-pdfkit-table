@@ -89,14 +89,15 @@ view pdf example | clone a full code example
 | *width*      | width of table    |
 | *x*          | position x (left) |
 | *y*          | position y (top)  |
-| *columnSpacing* |   |
-| *rowSpacing*    |   |
+| *columnSpacing* | 5 |
+| *rowSpacing*    | 3 |
+
 
 ---------------------|-------------|
-| *Functions* | description |
+| *Functions*        | description |
 ---------------------|-------------|
-| prepareHeader | prepareHeader: () => doc.font("Helvetica-Bold").fontSize(8)  |
-| prepareRow    | prepareRow: (row, i) => doc.font("Helvetica").fontSize(8)  |
+| prepareHeader      | prepareHeader: () => doc.font("Helvetica-Bold").fontSize(8) |
+| prepareRow         | prepareRow: (row, i) => doc.font("Helvetica").fontSize(8) |
 
 
 ```js
