@@ -87,6 +87,12 @@ view pdf example | clone a full code example
 
 ### Options
 
+- *width* 
+- *x*
+- *y*
+
 *width* 
+
 *x*
+
 *y*
