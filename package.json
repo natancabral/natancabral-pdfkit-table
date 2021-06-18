@@ -1,0 +1,22 @@
+{
+  "name": "natancabral-pdfkit-table",
+  "version": "0.0.4",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/natancabral/natancabral-pdfkit-table.git"
+  },
+  "author": "",
+  "license": "MOT",
+  "bugs": {
+    "url": "https://github.com/natancabral/natancabral-pdfkit-table/issues"
+  },
+  "homepage": "https://github.com/natancabral/natancabral-pdfkit-table#readme",
+  "dependencies": {
+    "pdfkit": "^0.12.1"
+  }
+}
