@@ -1,6 +1,4 @@
 ./node_modules
-./tester-package
 
 ./package-lock.json
 ./pdfkit-guide.pdf
-./try.js

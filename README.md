@@ -102,15 +102,18 @@ npm install natancabral-pdfkit-table
 
 ## Options
 
-| *Properties*       | description       |
----------------------|-------------------|
-| *width*            | width of table    |
-| *x*                | position x (left) |
-| *y*                | position y (top)  |
-| *columnSpacing*    | 5 |
-| *rowSpacing*       | 3 |
+| *Properties*         | description       |
+-----------------------|-------------------|
+| **width**            | width of table    |
+| **x**                | position x (left) |
+| **y**                | position y (top)  |
+| **columnSpacing**    | 5 |
+| **rowSpacing**       | 3 |
+| **prepareHeader**    | Function |
+| **prepareRow**       | Function |
 
 
+Example code:
 ```js
 const options = {
   // properties
