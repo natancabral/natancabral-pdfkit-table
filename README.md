@@ -12,7 +12,7 @@
       ["England", "33%", "+4.44%"],
     ],
   };
-  doc.moveDown().table( tableArray, { width: 300 });
+  doc.moveDown().table( tableArray, { width: 300 }); // A4 595.28 x 841.89 (portrait) (about width sizes)
   // end code
 ```
 
@@ -23,12 +23,12 @@
   // A4 595.28 x 841.89 (portrait) (about width sizes)
   const table = {
     headers: [
-      { label:"Header 1", property: 'name', width: 60, renderer: null },
-      { label:"Header 2", property: 'description', width: 150, renderer: null }, 
-      { label:"Header 3", property: 'price1', width: 100, renderer: null }, 
-      { label:"Header 4", property: 'price2', width: 100, renderer: null }, 
-      { label:"Header 5", property: 'price3', width: 100, renderer: null }, 
-      { label:"Header 6", property: 'price4', width: 43, renderer: null },
+      { label:"Name", property: 'name', width: 60, renderer: null },
+      { label:"Description", property: 'description', width: 150, renderer: null }, 
+      { label:"Price 1", property: 'price1', width: 100, renderer: null }, 
+      { label:"Price 2", property: 'price2', width: 100, renderer: null }, 
+      { label:"Price 3", property: 'price3', width: 100, renderer: null }, 
+      { label:"Price 4", property: 'price4', width: 43, renderer: null },
     ],
     datas: [
       {description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean mattis ante in laoreet egestas. ', price1: '$1', price3: '$ 3', price2: '$2', price4: '$4',name: 'Name 1', },
@@ -83,17 +83,36 @@ view pdf example | clone a full code example
 
 ### Options
 
-| options properties | description |
+| options |
 ---------------------|-------------|
-| *width* | sdasdasd |
-| *x* | sdasdasd |
-| *y* | sdasdasd |
+| *Properties* | description |
+---------------------|-------------|
+| *width*      | width of table    |
+| *x*          | position x (left) |
+| *y*          | position y (top)  |
+| *columnSpacing* |   |
+| *rowSpacing*    |   |
+---------------------|-------------|
+| *Functions* | description |
+---------------------|-------------|
+| prepareHeader | prepareHeader: () => doc.font("Helvetica-Bold").fontSize(8)  |
+| prepareRow    | prepareRow: (row, i) => doc.font("Helvetica").fontSize(8)  |
 
-*width* 
 
-*x*
-
-*y*
+```js
+const options = {
+  // properties
+  width: 500, // {Number} default: undefined // A4 595.28 x 841.89 (portrait) (about width sizes)
+  x: 500, // {Number} default: undefined
+  y: 500, // {Number} default: undefined
+  columnSpacing: 5, // {Number} default: 5
+  rowSpacing: 3, // {Number} default: 3
+  width: 500, // default: undefined
+  // functions
+  prepareHeader: () => doc.font("Helvetica-Bold").fontSize(8),
+  prepareRow: (row, i) => doc.font("Helvetica").fontSize(8),
+}
+```
 
 ## License
 
