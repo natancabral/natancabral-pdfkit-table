@@ -221,8 +221,8 @@ class PDFDocumentWithTables extends PDFDocument {
         }
         // size
         if( text.indexOf('size') === 0 ){
-          let size = String(text).substr(4,2).replace(':','').replace('+','') >> 0; size < 7 ? size = 7 : null ;
-          this.fontSize(size);
+          let size = String(text).substr(4,2).replace(':','').replace('+','') >> 0;
+          this.fontSize( size < 7 ? 7 : size );
           text = text.replace(`size${size}:`,'');
         }
 
