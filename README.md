@@ -100,7 +100,7 @@ npm install natancabral-pdfkit-table
 ```
 
 ## Table
-
+ 
 Example code:
 ```js
 const table = {
