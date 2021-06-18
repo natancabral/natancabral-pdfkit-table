@@ -106,12 +106,20 @@ Example code:
 const table = {
   // simple headers only with ROWS (not DATAS)  
   headers: ['Name', 'Age'],
+  // simple content
+  rows: [
+    ['Jack', '32'], // row 1
+    ['Maria', '30'], // row 2
+  ]
+};
+
+const table = {
   // complex headers work with ROWS and DATAS  
   headers: [
     { label:"Name", property: 'name', width: 100, renderer: null },
     { label:"Age", property: 'age', width: 100, renderer: null },
   ],
-  // simple content
+  // simple content (works fine!)
   rows: [
     ['Jack', '32'], // row 1
     ['Maria', '30'], // row 2
@@ -122,6 +130,8 @@ const table = {
     // age is object value with style options
     { name: 'Maria', age: { label: 30 , options: { fontSize: 12 }}, },
   ],
+};
+
 ```
 
 ## Options
