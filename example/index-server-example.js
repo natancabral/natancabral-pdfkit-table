@@ -41,7 +41,10 @@ app.get("/", function (req, res) {
       ["England", "33%", "+4.44%"],
     ],
   };
-  doc.moveDown().table( tableArray, { width: 300 }); // A4 595.28 x 841.89 (portrait) (about width sizes)
+  doc.table( tableArray, { width: 300 }); // A4 595.28 x 841.89 (portrait) (about width sizes)
+
+  // move to down
+  doc.moveDown(); // separate tables
 
   // -----------------------------------------------------------------------------------------------------
   // Complex Table with Object
