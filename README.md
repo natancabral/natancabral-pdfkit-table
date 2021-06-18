@@ -1,6 +1,6 @@
 # natancabral-pdfkit-table
 
-Create table using pdfkit extends.
+Create a table using pdfkit. #server-side.
 
 ## Examples
 
