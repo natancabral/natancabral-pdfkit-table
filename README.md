@@ -1,10 +1,14 @@
 # natancabral-pdfkit-table
 
+Create table using pdfkit extends.
+
 ## Examples
 
 [view pdf example](https://github.com/natancabral/natancabral-pdfkit-table/raw/main/example/document.pdf) | 
 [full code example](https://github.com/natancabral/natancabral-pdfkit-table/blob/main/example/index-server-example.js) |
 [both](https://github.com/natancabral/natancabral-pdfkit-table/blob/main/example/)
+
+<img src="https://github.com/natancabral/natancabral-pdfkit-table/blob/main/example/pdf-sample.png"/>
 
 ### Start
 
