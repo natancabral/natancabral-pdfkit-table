@@ -1,6 +1,6 @@
 # natancabral-pdfkit-table
 
-
+## Examples
 ### Example 1 - Simple Array Table
 ```js
   // requires 
@@ -81,7 +81,7 @@
 
 view pdf example | clone a full code example
 
-### Options
+## Options
 
 | *Properties*       | description       |
 ---------------------|-------------------|
@@ -96,6 +96,7 @@ view pdf example | clone a full code example
 ---------------------|-------------|
 | prepareHeader      | prepareHeader: () => doc.font("Helvetica-Bold").fontSize(8) |
 | prepareRow         | prepareRow: (row, i) => doc.font("Helvetica").fontSize(8) |
+
 
 
 ```js
