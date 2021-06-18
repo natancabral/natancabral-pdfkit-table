@@ -1,6 +1,9 @@
 # natancabral-pdfkit-table
 
 ## Examples
+
+[view pdf example](https://github.com/natancabral/natancabral-pdfkit-table/raw/main/document.pdf) | clone a full code example
+
 ### Example 1 - Simple Array Table
 ```js
   // requires 
@@ -79,7 +82,6 @@
   doc.end();
 ```
 
-view pdf example | clone a full code example
 
 ## Options
 
