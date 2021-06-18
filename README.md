@@ -83,9 +83,11 @@ view pdf example | clone a full code example
 
 ### Options
 
-- *width* 
-- *x*
-- *y*
+| options properties | description |
+---------------------|-------------|
+| *width* | sdasdasd |
+| *x* | sdasdasd |
+| *y* | sdasdasd |
 
 *width* 
 
@@ -106,7 +108,7 @@ The MIT License.
     </td>
     <td>
       Natan Cabral<br />
-      <a href="mailto:natancabral[.]hotmail.com">natancabral[.]hotmail.com</a><br />
+      <a href="mailto:natancabral@hotmail.com">natancabral@hotmail.com</a><br />
       <a href="https://github.com/natancabral/">https://github.com/natancabral/</a>
     </td>
   </tr>
@@ -114,6 +116,7 @@ The MIT License.
 
 ## Thank you
 
+- pdfkit - [pdfkit](https://www.npmjs.com/package/pdfkit)
 - code base - [andronio](https://www.andronio.me/2017/09/02/pdfkit-tables/)
 - ideas - [giuseppe-santoro](https://github.com/foliojs/pdfkit/issues/29#issuecomment-56504943)
 - influency [voilab](https://github.com/voilab/voilab-pdf-table)
