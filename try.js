@@ -1,9 +1,9 @@
 "use strict";
-module.exports = function (req, res) {
+//module.exports = function (req, res) {
   // const fs = require("fs");
   // const PDFDocument = require("pdfkit");
   const fs = require("fs");
-  const PDFDocument = require("./pdfkit-tables.js");
+  const PDFDocument = require("./index.js");
   const doc = new PDFDocument({
     margin: 30, 
   });
@@ -119,4 +119,4 @@ module.exports = function (req, res) {
   doc.pipe(res); // HTTP response only to show
 
   doc.end();
-};
+//};
