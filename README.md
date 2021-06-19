@@ -35,10 +35,13 @@ npm install natancabral-pdfkit-table
     datas: [/* complex data */],
     rows: [/* or simple data */],
   }
+  // options
   const options = {}
-
   // the magic
   doc.table( table, options );
+
+  // done!
+  doc.end();
 
 ```
 
@@ -269,6 +272,7 @@ datas: [
 
 - renderer function. Like renderer: (value) => { return `$${value}`}
 - load json file - require | string
+- sample with database
 - setFontFamily {String}
 - setBoldFontFamily {String}
 - verticalLines {Boolean}
