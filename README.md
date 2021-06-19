@@ -192,15 +192,15 @@ const table = {
 
 ### Options
 
-| Properties           | description       |
------------------------|-------------------|
-| **width**            | width of table    |
-| **x**                | position x (left) |
-| **y**                | position y (top)  |
-| **columnSpacing**    | 5 |
-| **rowSpacing**       | 3 |
-| **prepareHeader**    | Function |
-| **prepareRow**       | Function |
+| Properties           | Type                  | Default            | Description       |
+-----------------------|-----------------------|--------------------|-------------------|
+| **width**            | <code>Number</code>   | undefined          | width of table    |
+| **x**                | <code>Number</code>   | undefined | dox.x  | position x (left) |
+| **y**                | <code>Number</code>   | undefined | dox.y  | position y (top)  |
+| **columnSpacing**    | <code>Number</code>   | 5                  |                   |
+| **rowSpacing**       | <code>Number</code>   | 3                  |                   |
+| **prepareHeader**    | <code>Function</code> | Function           |                   |
+| **prepareRow**       | <code>Function</code> | Function           |                   |
 
 
 Example code:
