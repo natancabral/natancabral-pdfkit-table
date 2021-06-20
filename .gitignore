@@ -1,6 +1,5 @@
 node_modules
 local-example
-local-example2
 
 ./package-lock.json
 ./pdfkit-guide.pdf
