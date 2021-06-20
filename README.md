@@ -291,7 +291,7 @@ datas: [
   { name: 'size20:Maria' },
   { name: 'size8:Will' },
    // normal
- { name: 'San' },
+  { name: 'San' },
 ]
 ``` 
 
@@ -326,9 +326,10 @@ datas: [
 
 ## ToDo
 
-- [Suggestions / Issues / Fixes](https://github.com/natancabral/natancabral-pdfkit-table/issues)
+- [Suggestions / Issues / Fixes](https://github.com/natancabral/pdfkit-table/issues)
 - renderer function on cell. Like renderer: (value) => { return `$${value}`}
 - sample with database
+- alignment
 - setFontFamily {String}
 - setBoldFontFamily {String}
 - verticalLines {Boolean}
@@ -344,6 +345,11 @@ datas: [
 - striped {Boolean} (corsimcornao)
 
 ## Changelogs
+
+### 0.1.32
+
++ spacing cell and header alignment
++ **Thank you, contributors!**
 
 ### 0.1.31
 
