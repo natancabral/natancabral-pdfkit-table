@@ -287,6 +287,9 @@ datas: [
 datas: [
   // bold
   { name: 'bold:Jack' },
+  { name: 'size20:Maria' },
+  { name: 'size8:Will' },
+  { name: 'San' },
 ]
 ``` 
 
