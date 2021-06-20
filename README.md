@@ -266,12 +266,6 @@ const options = {
 #### Options Row
 
 - separation {Booleon} 
-- String
-  - **bold:** 
-    - 'bold:Jack'
-  - **size{n}:** 
-    - 'size11:Jack'
-    - 'size20:Jack'
 - fontSize {Number}
 - fontFamily {String}
 
@@ -281,6 +275,13 @@ datas: [
   { name: 'Jack', options: { fontSize: 10, fontFamily: 'Courier-Bold', separation: true } },
 ]
 ``` 
+
+- String
+  - **bold:** 
+    - 'bold:Jack'
+  - **size{n}:** 
+    - 'size11:Jack'
+    - 'size20:Jack'
 
 ```js
 datas: [
