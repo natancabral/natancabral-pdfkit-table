@@ -28,7 +28,7 @@ app.get("/", function (req, res) {
   });
 
   // to save on server
-  doc.pipe(fs.createWriteStream("./file-table.pdf"));
+  doc.pipe(fs.createWriteStream("./document.pdf"));
 
   // -----------------------------------------------------------------------------------------------------
   // Simple Table with Array
@@ -63,7 +63,7 @@ app.get("/", function (req, res) {
       { description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean mattis ante in laoreet egestas. ', price1: '$1', price3: '$ 3', price2: '$2', price4: '4', name: 'Name 1', },
       { name: 'bold:Name 2', description: 'bold:Lorem ipsum dolor.', price1: 'bold:$1', price3: '$3', price2: '$2', price4: '4', options: { fontSize: 10, separation: true } },
       { name: 'Name 3', description: 'Lorem ipsum dolor.', price1: 'bold:$1', price4: '4.111111', price2: '$2', price3: { label:'PRICE $3', options: { fontSize: 12 } }, },
-     ],
+      ],
     rows: [
       [
         "Apple",

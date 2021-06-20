@@ -9,7 +9,7 @@ Helps to draw informations in simple tables using pdfkit. #server-side.
 [view pdf example](https://github.com/natancabral/natancabral-pdfkit-table/raw/main/example/document.pdf) | 
 [full code example](https://github.com/natancabral/natancabral-pdfkit-table/blob/main/example/index-example.js) |
 [server example](https://github.com/natancabral/natancabral-pdfkit-table/blob/main/example/index-server-example.js) |
-[json example](https://github.com/natancabral/natancabral-pdfkit-table/blob/main/example/index-example-json.js) |
+[json example](https://github.com/natancabral/natancabral-pdfkit-table/blob/main/example/index-json-example.js) |
 [both](https://github.com/natancabral/natancabral-pdfkit-table/blob/main/example/)
 
 <img src="https://github.com/natancabral/natancabral-pdfkit-table/blob/main/example/pdf-sample.png"/>
@@ -30,7 +30,7 @@ npm install natancabral-pdfkit-table
   // file name
   doc.pipe(fs.createWriteStream("./file-table.pdf"));
   
-  // table  
+  // table
   const table = { 
     headers: [],
     datas: [/* complex data */],
@@ -46,10 +46,10 @@ npm install natancabral-pdfkit-table
 
 ```
 
-### Example 1 - Simple Array Table
+### Example 1 - Simple Array
 ```js
   // requires 
-  const tableArray = {
+  const table = {
     headers: ["Country", "Conversion rate", "Trend"],
     rows: [
       ["Switzerland", "12%", "+1.12%"],
@@ -57,7 +57,7 @@ npm install natancabral-pdfkit-table
       ["England", "33%", "+4.44%"],
     ],
   };
-  doc.table( tableArray, { width: 300 }); // A4 595.28 x 841.89 (portrait) (about width sizes)
+  doc.table( table, { width: 300 }); // A4 595.28 x 841.89 (portrait) (about width sizes)
   // end code
 ```
 
@@ -132,8 +132,43 @@ npm install natancabral-pdfkit-table
   });
 ```
 
+### Example 3 - Json
 
-### Example 3 - Full Code
+```js
+const tableJson = `{ 
+  "headers": [
+    { "label":"Name", "property":"name", "width":100 },
+    { "label":"Age", "property":"age", "width":100 },
+    { "label":"Year", "property":"year", "width":100 }
+  ],
+  "datas": [
+    { "name":"bold:Name 1", "age":"Age 1", "year":"Year 1" },
+    { "name":"Name 2", "age":"Age 2", "year":"Year 2" },
+    { "name":"Name 3", "age":"Age 3", "year":"Year 3" }
+  ],
+  "rows": [
+    ["Name 4", "Age 4", "Year 4"]
+  ],
+  "options": {
+    "width": 300
+  }
+}`
+doc.table( tableJson );
+```
+
+or
+
+```js
+const json = require('./table.json');
+// if json file is array
+Array.isArray(json) ? 
+// any tables
+json.forEach( table => doc.table( table, table.options || {} ) ) : 
+// one table
+doc.table( json, json.options || {} ) ;
+```
+
+### Example 4 - Full Code
 ```js
   // require
   const fs = require("fs");
@@ -155,7 +190,7 @@ npm install natancabral-pdfkit-table
 
 ## Table
 
-- <code>Array.&lt;object&gt;</code>
+- <code>Array.&lt;object&gt;</code> | <code>JSON</code>
   - headers <code>Array.&lt;object&gt;</code> | <code>Array.[]</code>
     - label <code>String</code>
     - property <code>String</code>
@@ -316,6 +351,6 @@ The MIT License.
 ## Thank you
 
 - pdfkit - [pdfkit](https://www.npmjs.com/package/pdfkit)
-- code base - [andronio](https://www.andronio.me/2017/09/02/pdfkit-tables/)
+- code base - [andronio](https://www.andronio.me/2017/09/02/natancabral-pdfkit-tables/)
 - ideas - [giuseppe-santoro](https://github.com/foliojs/pdfkit/issues/29#issuecomment-56504943)
 - influence [voilab](https://github.com/voilab/voilab-pdf-table)
