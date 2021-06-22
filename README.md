@@ -57,7 +57,11 @@ npm install natancabral-pdfkit-table
       ["England", "33%", "+4.44%"],
     ],
   };
-  doc.table( table, { width: 300 }); // A4 595.28 x 841.89 (portrait) (about width sizes)
+  doc.table( table, { 
+    // A4 595.28 x 841.89 (portrait) (about width sizes)
+    width: 300,
+    //columnsSize: [ 200, 100, 100 ],
+  }); 
   // end code
 ```
 
@@ -242,6 +246,7 @@ const table = {
 | **width**            | <code>Number</code>   | undefined          | width of table    |
 | **x**                | <code>Number</code>   | undefined / doc.x  | position x (left) |
 | **y**                | <code>Number</code>   | undefined / doc.y  | position y (top)  |
+| **columnsSize**      | <code>Array</code>    | undefined          | define sizes      |
 | **columnSpacing**    | <code>Number</code>   | 5                  |                   |
 | **rowSpacing**       | <code>Number</code>   | 3                  |                   |
 | **prepareHeader**    | <code>Function</code> | Function           |                   |
@@ -346,6 +351,19 @@ datas: [
 
 ## Changelogs
 
+### 0.1.34
+
++ add **columnsSize** on options = {} // only to simple table
+
+### 0.1.33
+
++ Function **tableToJson**
+  - import {tableToJson} from 'natancabral-pdfkit-table';
+  - const table = tableToJson('#id_table'); <code>{Object}</code>
++ Function **allTablesToJson**
+  - import {allTablesToJson} from 'natancabral-pdfkit-table';
+  - const tables = allTablesToJson(); <code>{Array}</code>
+
 ### 0.1.32
 
 + spacing cell and header alignment
@@ -381,3 +399,4 @@ The MIT License.
 - code base - [andronio](https://www.andronio.me/2017/09/02/natancabral-pdfkit-tables/)
 - ideas - [giuseppe-santoro](https://github.com/foliojs/pdfkit/issues/29#issuecomment-56504943)
 - influence [voilab](https://github.com/voilab/voilab-pdf-table)
+- **Marcos Aurelio P. Araujo**, thanks for give me the challenge.
