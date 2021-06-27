@@ -212,7 +212,7 @@ doc.table( json, json.options || {} ) ;
   - rows <code>Array.[]</code>
   - title <code>String</code>
   - subtitle <code>String</code>
-  
+
 Example code:
 ```js
 const table = {
@@ -343,7 +343,7 @@ datas: [
 
 ## ToDo
 
-- [Suggestions / Issues / Fixes](https://github.com/natancabral/pdfkit-table/issues)
+- [Suggestions / Issues / Fixes](https://github.com/natancabral/natancabral-pdfkit-table/issues)
 - striped {Boolean} (corsimcornao)
 - colspan - the colspan attribute defines the number of columns a table cell should span.
 - renderer function on cell. Like renderer: (value) => { return `$${value}`}
@@ -361,8 +361,15 @@ datas: [
 - tableLineWidth {Number}
 - tableLineColor {String}
 - backgroundColor  {String}
+- margin: marginBottom before, marginTop after
+- add line bottom or line top
 
 ## Changelogs
+
+### 0.1.38
+
++ **tables**  <code>{Function}</code> - Add many tables. 
+  - doc.tables([ table0, table1, table2, ... ]);
 
 ### 0.1.37
 
