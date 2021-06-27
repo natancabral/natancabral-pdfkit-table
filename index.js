@@ -216,12 +216,8 @@ class PDFDocumentWithTables extends PDFDocument {
         lastPosition = startX;
         table.headers.forEach(({label, width, renderer}, i) => {
           
-          // renderer && (table.headers[i].renderer = fEval(renderer));
-
           if(renderer && typeof renderer === 'string') {
             table.headers[i].renderer = fEval(renderer);
-            // console.log('A',renderer);
-            // console.log('B',table.headers[i].renderer);
           }
 
           width = width >> 0; // number
