@@ -348,6 +348,7 @@ datas: [
 ## ToDo
 
 - [Suggestions / Issues / Fixes](https://github.com/natancabral/natancabral-pdfkit-table/issues)
+- cellPadding {Array} [5,2,5,2];
 - striped {Boolean} (corsimcornao)
 - colspan - the colspan attribute defines the number of columns a table cell should span.
 - renderer function on cell. Like renderer: (value) => { return `$${value}`}
@@ -368,6 +369,11 @@ datas: [
 - add line bottom or line top
 
 ## Changelogs
+
+### 0.1.43
+
++ Remove **rowSpacing**
++ Fix **columnSpacing**
 
 ### 0.1.41
 
