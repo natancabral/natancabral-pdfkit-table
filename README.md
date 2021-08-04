@@ -261,7 +261,6 @@ const table = {
 | **y**                | <code>Number</code>   | undefined / doc.y  | position y (top)  |
 | **columnsSize**      | <code>Array</code>    | undefined          | define sizes      |
 | **columnSpacing**    | <code>Number</code>   | 5                  |                   |
-| **rowSpacing**       | <code>Number</code>   | 3                  |                   |
 | **addPage**          | <code>Boolean</code>  | false              | add table on new page |
 | **prepareHeader**    | <code>Function</code> | Function           | ()                  |
 | **prepareRow**       | <code>Function</code> | Function           | (row, indexColumn, indexRow, rectRow) => {} |
@@ -277,7 +276,6 @@ const options = {
   x: 0, // {Number} default: undefined | doc.x
   y: 0, // {Number} default: undefined | doc.y
   columnSpacing: 5, // {Number} default: 5
-  rowSpacing: 3, // {Number} default: 3
   // functions
   prepareHeader: () => doc.font("Helvetica-Bold").fontSize(8), // {Function} 
   prepareRow: (row, indexColumn, indexRow, rectRow) => doc.font("Helvetica").fontSize(8), // {Function} 
@@ -369,6 +367,10 @@ datas: [
 - add line bottom or line top
 
 ## Changelogs
+
+### 0.1.44
+
++ Fix paddings and distances
 
 ### 0.1.43
 
