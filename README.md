@@ -368,6 +368,12 @@ datas: [
 
 ## Changelogs
 
+### 0.1.45
+
++ add **rectCell** on renderer
+  - renderer = ( value, indexColumn, indexRow, row, rectRow, rectCell ) => {}
+  - Thanks ***Eduardo Miranda***
+
 ### 0.1.44
 
 + Fix paddings and distances
