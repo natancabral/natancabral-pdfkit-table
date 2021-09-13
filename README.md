@@ -1,4 +1,4 @@
-# natancabral-natancabral-pdfkit-table
+# natancabral-pdfkit-table
 
 #### Generate pdf tables with javascript (PDFKIT plugin)
 Helps to draw informations in simple tables using pdfkit. #server-side.
@@ -6,26 +6,26 @@ Helps to draw informations in simple tables using pdfkit. #server-side.
 
 ## Examples
 
-[view pdf example](https://github.com/natancabral/natancabral-natancabral-pdfkit-table/raw/main/example/document.pdf) | 
-[color pdf](https://github.com/natancabral/natancabral-natancabral-pdfkit-table/raw/main/example/document-color.pdf) | 
-[full code example](https://github.com/natancabral/natancabral-natancabral-pdfkit-table/blob/main/example/index-example.js) |
-[server example](https://github.com/natancabral/natancabral-natancabral-pdfkit-table/blob/main/example/index-server-example.js) |
-[json example](https://github.com/natancabral/natancabral-natancabral-pdfkit-table/blob/main/example/index-json-example.js) |
-[all](https://github.com/natancabral/natancabral-natancabral-pdfkit-table/blob/main/example/)
+[view pdf example](https://github.com/natancabral/natancabral-pdfkit-table/raw/main/example/document.pdf) | 
+[color pdf](https://github.com/natancabral/natancabral-pdfkit-table/raw/main/example/document-color.pdf) | 
+[full code example](https://github.com/natancabral/natancabral-pdfkit-table/blob/main/example/index-example.js) |
+[server example](https://github.com/natancabral/natancabral-pdfkit-table/blob/main/example/index-server-example.js) |
+[json example](https://github.com/natancabral/natancabral-pdfkit-table/blob/main/example/index-json-example.js) |
+[all](https://github.com/natancabral/natancabral-pdfkit-table/blob/main/example/)
 
-<img src="https://github.com/natancabral/natancabral-natancabral-pdfkit-table/blob/main/example/pdf-sample.png"/>
+<img src="https://github.com/natancabral/natancabral-pdfkit-table/blob/main/example/pdf-sample.png"/>
 
 ## Install
 
 ```bash
-npm install natancabral-natancabral-pdfkit-table
+npm install natancabral-pdfkit-table
 ```
 
 ## Use
 
 ```js
   const fs = require("fs");
-  const PDFDocument = require("natancabral-natancabral-pdfkit-table");
+  const PDFDocument = require("natancabral-pdfkit-table");
   const doc = new PDFDocument({ margin: 30, size: 'A4' });
   
   // file name
@@ -188,7 +188,7 @@ doc.table( json, json.options || {} ) ;
 ```js
   // require
   const fs = require("fs");
-  const PDFDocument = require("natancabral-natancabral-pdfkit-table");
+  const PDFDocument = require("natancabral-pdfkit-table");
   const doc = new PDFDocument({ margin: 30, size: 'A4', });
   // file name
   doc.pipe(fs.createWriteStream("./file-table.pdf"));
@@ -211,7 +211,7 @@ doc.table( json, json.options || {} ) ;
     - label <code>String</code>
     - property <code>String</code>
     - width <code>Number</code>
-    - renderer <code>Function</code> function(value, indexColumn, indexRow, row) { return value }
+    - renderer <code>Function</code> function( value, indexColumn, indexRow, row, rectRow, rectCell ) { return value }
   - datas <code>Array.&lt;object&gt;</code>
   - rows <code>Array.[]</code>
   - title <code>String</code>
@@ -345,7 +345,7 @@ datas: [
 
 ## ToDo
 
-- [Suggestions / Issues / Fixes](https://github.com/natancabral/natancabral-natancabral-pdfkit-table/issues)
+- [Suggestions / Issues / Fixes](https://github.com/natancabral/natancabral-pdfkit-table/issues)
 - cellPadding {Array} [5,2,5,2];
 - striped {Boolean} (corsimcornao)
 - colspan - the colspan attribute defines the number of columns a table cell should span.
@@ -367,6 +367,11 @@ datas: [
 - add line bottom or line top
 
 ## Changelogs
+
+### 0.1.46
+
++ fix addBackground() function to node 8
+  - Thanks ***@mehmetunubol***
 
 ### 0.1.45
 
@@ -439,10 +444,10 @@ datas: [
 ### 0.1.33
 
 + Function **tableToJson**
-  - import {tableToJson} from 'natancabral-natancabral-pdfkit-table';
+  - import {tableToJson} from 'natancabral-pdfkit-table';
   - const table = tableToJson('#id_table'); <code>{Object}</code>
 + Function **allTablesToJson**
-  - import {allTablesToJson} from 'natancabral-natancabral-pdfkit-table';
+  - import {allTablesToJson} from 'natancabral-pdfkit-table';
   - const tables = allTablesToJson(); <code>{Array}</code>
 
 ### 0.1.32
@@ -477,6 +482,6 @@ The MIT License.
 ## Thank you
 
 - pdfkit - [pdfkit](https://www.npmjs.com/package/pdfkit)
-- code base - [andronio](https://www.andronio.me/2017/09/02/natancabral-natancabral-pdfkit-tables/)
+- code base - [andronio](https://www.andronio.me/2017/09/02/natancabral-pdfkit-tables/)
 - ideas - [giuseppe-santoro](https://github.com/foliojs/pdfkit/issues/29#issuecomment-56504943)
 - influence [voilab](https://github.com/voilab/voilab-pdf-table)
