@@ -67,8 +67,7 @@ class PDFDocumentWithTables extends PDFDocument {
     const title            = table.title    ? table.title    : ( options.title    ? options.title    : '' ) ;
     const subtitle         = table.subtitle ? table.subtitle : ( options.subtitle ? options.subtitle : '' ) ;
 
-    const columnIsDefined  = options.columnsSize.length ? true : false ; 
-    const columnCount      = table.headers.length; // TODO if not have header
+    const columnIsDefined  = options.columnsSize.length ? true : false;
     const columnSpacing    = options.columnSpacing || 3; // 15
       let columnSizes      = [];
       let columnPositions  = []; // 0, 10, 20, 30, 100
@@ -86,7 +85,6 @@ class PDFDocumentWithTables extends PDFDocument {
       let rowBottomY       = 0;
       let tableWidth       = 0;
 
-    // if options.x === null 
     // reset position to margins.left
     if( options.x === null || options.x === -1 ){
       startX = this.page.margins.left;
@@ -189,7 +187,7 @@ class PDFDocumentWithTables extends PDFDocument {
     const prepareRowBackground = (row, rect) => {
 
       // validate
-      if( typeof row !== 'object' ) return; 
+      if(typeof row !== 'object') return;
 
       // options
       row.options && (row = row.options);
@@ -215,7 +213,7 @@ class PDFDocumentWithTables extends PDFDocument {
       let result = 0;
 
       // if row is object, content with property and options
-      if( !Array.isArray(row) && typeof row === 'object' && !row.hasOwnProperty('property') ){
+      if(!Array.isArray(row) && typeof row === 'object' && !row.hasOwnProperty('property')){
         const cells = []; 
         // get all properties names on header
         table.headers.forEach(({property}) => cells.push(row[property]) );
@@ -256,16 +254,6 @@ class PDFDocumentWithTables extends PDFDocument {
     
     const calcColumnsSizes = () => {
 
-      // const columnPositions  = []; // 0, 10, 20, 30, 100
-
-      // values
-      // tableWidth 477
-      // columnPositions [
-      //   30, 180, 330,  
-      //   30, 180, 330,  
-      //   30, 180, 330,
-      // ]
-
       let h = []; // header width
       let p = []; // position
       let w = 0;  // table width
@@ -285,7 +273,7 @@ class PDFDocumentWithTables extends PDFDocument {
       } 
       // 3o
       if(h.length === 0) {
-        columnWidth = (w / table.headers.length); // - columnSpacing
+        columnWidth = ( w / table.headers.length ); // - columnSpacing // define column width
         table.headers.forEach( () => h.push(columnWidth) );
       }
 
@@ -323,93 +311,64 @@ class PDFDocumentWithTables extends PDFDocument {
       prepareHeader();
 
       let rowHeight = computeRowHeight(table.headers);
-      let lastPosition = 0; // x position head
+      let lastPosition = startX; // x position head
 
       // Check to have enough room for header and first rows. default 3
       // if (startY + 2 * rowHeight > maxY) this.addPage();
 
-      if(table.headers && table.headers.length > 0){
+      if(table.headers.length > 0) {
 
+        // simple header
         if(typeof table.headers[0] === 'string') {
 
-          // we have columnSizes[] complete
-          if(columnIsDefined) {
+          // // background header
+          // const rectRow = {
+          //   x: startX, 
+          //   y: startY - columnSpacing - (rowDistance * 2), 
+          //   width: columnWidth, 
+          //   height: rowHeight + columnSpacing,
+          // };
 
-            // sum columns sizes
-            columnWidth = columnSizes.reduce((acc, curr, index ) => acc + curr, 0);
-    
+          // // add background
+          // this.addBackground(rectRow);
+
+          // print headers
+          table.headers.forEach((header, i) => {
+
             // background header
-            const rectRow = {
-              x: startX, 
+            const rectCell = {
+              x: lastPosition, 
               y: startY - columnSpacing - (rowDistance * 2), 
-              width: columnWidth, 
+              width: columnSizes[i], 
               height: rowHeight + columnSpacing,
             };
 
             // add background
-            this.addBackground(rectRow);
+            this.addBackground(rectCell);
 
-            lastPosition = startX;
-
-            // print headers
-            table.headers.forEach((header, i) => {
-
-              this.text(header, lastPosition, startY, {
-                width: columnSizes[i] >> 0,
-                align: "left",
-              });
-              
-              // columnPositions.push(lastPosition);
-              lastPosition += columnSizes[i] >> 0;
-
+            this.text(header, lastPosition, startY, {
+              width: columnSizes[i] >> 0,
+              align: "left",
             });
             
-          } else {
+            lastPosition += columnSizes[i] >> 0;
 
-            // background header
-            const rectRow = {
-              x: startX, 
-              y: startY - columnSpacing - (rowDistance * 2), 
-              width: columnWidth * table.headers.length, 
-              height: rowHeight + columnSpacing,
-            };
-
-            // add background
-            this.addBackground(rectRow);
-            
-            // print headers
-            table.headers.forEach( (header, i) => {
-
-              lastPosition = startX + i * columnWidth;
-              this.text(header, lastPosition, startY, {
-                width: columnWidth,
-                align: "left",
-              });
-
-              // columnSizes.push(columnWidth);
-              // columnPositions.push(lastPosition);
-
-            });
-
-          }
+          });
           
         }else{
-
-          lastPosition = startX;
 
           // Print all headers
           table.headers.forEach(( dataHeader, i) => {
 
             let {label, width, renderer} = dataHeader;
             // check defination
-            width = width || columnWidth;
+            width = width || columnSizes[i];
+            // force number
+            width = width >> 0;
     
             if(renderer && typeof renderer === 'string') {
               table.headers[i].renderer = fEval(renderer);
             }
-
-            // force number
-            width = width >> 0;
             
             // background header
             const rectRow = {
@@ -428,38 +387,29 @@ class PDFDocumentWithTables extends PDFDocument {
               align: "left",
             })
 
-            // columnSizes.push(width);
-            // columnPositions.push(lastPosition);
             lastPosition += width;
 
           });
 
-          // set style
-          prepareRowOptions(table.headers);
-
         }
+
+        // set style
+        prepareRowOptions(table.headers);
+
       }
 
       // Refresh the y coordinate of the bottom of the headers row
       rowBottomY = Math.max(startY + computeRowHeight(table.headers), rowBottomY);
-
-      // update table width
-      // tableWidth = columnPositions[columnPositions.length-1] + columnSizes[columnSizes.length-1];
-
-      // this.logg('tableWidth',tableWidth);
-      // this.logg('columnPositions',columnPositions);
 
       // Separation line between headers and rows
       separationsRow(startX, rowBottomY);
 
     }
 
+    // End header
     addHeader();
 
-    // End header
-
-    // datas ----------------------------------------------------
-
+    // Datas
     table.datas.forEach((row, i) => {
 
       const rowHeight = computeRowHeight(row);
@@ -539,8 +489,7 @@ class PDFDocumentWithTables extends PDFDocument {
         }
 
         // renderer column
-        // renderer && (text = renderer(text, index, i, row, rectRow, rectCell)) // value, index-column, index-row, row 
-        // renderer column
+        // renderer && (text = renderer(text, index, i, row, rectRow, rectCell)) // value, index-column, index-row, row  nbhmn
         if(typeof renderer === 'function'){
           text = renderer(text, index, i, row, rectRow, rectCell); // value, index-column, index-row, row 
         }
@@ -570,12 +519,11 @@ class PDFDocumentWithTables extends PDFDocument {
           separationsRow(startX, rowBottomY, 1, 1);
         }
       }
-      
 
     });
-    // end datas
+    // End datas
 
-    // rows ----------------------------------------------------
+    // Rows
     table.rows.forEach((row, i) => {
 
       const rowHeight = computeRowHeight(row);
@@ -636,8 +584,8 @@ class PDFDocumentWithTables extends PDFDocument {
       separationsRow(startX, rowBottomY);      
 
     });
-    // end rows ----------------------------------------------------
-
+    // End rows
+    
     // update position
     this.x = startX;
     this.y = rowBottomY; // position y final;
