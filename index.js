@@ -20,11 +20,14 @@ class PDFDocumentWithTables extends PDFDocument {
    * @param {String} fillColor 
    * @param {Number} fillOpacity 
    */
-  addBackground ({x, y, width, height}, fillColor, fillOpacity) {
+  addBackground ({x, y, width, height}, fillColor, fillOpacity, callback) {
 
     // validate
     fillColor || (fillColor = 'grey');
     fillOpacity || (fillOpacity = 0.1);
+
+    // save current style
+    this.save();
 
     // draw bg
     this
@@ -35,11 +38,16 @@ class PDFDocumentWithTables extends PDFDocument {
     //.stroke()
     .fill();
 
+    // back to saved style
+    this.restore();
+
     // restore
-    this
-    .fillColor('black')
-    .fillOpacity(1)
-    .fill();
+    // this
+    // .fillColor('black')
+    // .fillOpacity(1)
+    // .fill();
+
+    typeof callback === 'function' && callback(this);
     
   }
 
@@ -61,6 +69,7 @@ class PDFDocumentWithTables extends PDFDocument {
     table.rows || (table.rows = []);
     table.options && (options = table.options);
 
+    options.padding || (options.padding = 0);
     options.columnsSize || (options.columnsSize = []);
     options.addPage || (options.addPage = false);
 
@@ -74,9 +83,10 @@ class PDFDocumentWithTables extends PDFDocument {
       let columnWidth      = 0;
 
     const rowDistance      = 0.5;
+      let cellPadding      = {top: 0, right: 0, bottom: 0, left: 0}; // universal
 
-    const prepareHeader    = options.prepareHeader || (() => this.font("Helvetica-Bold").fontSize(8));
-    const prepareRow       = options.prepareRow || ((row, indexColumn, indexRow, rectRow) => this.font("Helvetica").fontSize(8));
+    const prepareHeader    = options.prepareHeader || (() => this.fillColor('black').font("Helvetica-Bold").fontSize(8).fill());
+    const prepareRow       = options.prepareRow || ((row, indexColumn, indexRow, rectRow) => this.fillColor('black').font("Helvetica").fontSize(8).fill());
     
     const maxY             = this.page.height - (this.page.margins.top + this.page.margins.bottom);
 
@@ -167,6 +177,43 @@ class PDFDocumentWithTables extends PDFDocument {
 
     };
 
+    // padding: [10, 10, 10, 10]
+    // padding: [10, 10]
+    // padding: {top: 10, right: 10, bottom: 10, left: 10}
+    // padding: 10,
+    const prepareCellPadding = (p) => {
+
+      // array
+      if(Array.isArray(p)){
+        switch(p.length){
+          case 3: p = [...p, 0]; break;
+          case 2: p = [...p, ...p]; break;
+          case 1: p = Array(4).fill(p[0]); break;
+        }
+      }
+      // number
+      else if(typeof p === 'number'){
+        p = Array(4).fill(p);
+      }
+      // object
+      else if(typeof p === 'object'){
+        const {top, right, bottom, left} = p;
+        p = [top, right, bottom, left];
+      } 
+      // null
+      else {
+        p = Array(4).fill(0);
+      }
+
+      return {
+        top:    p[0] >> 0, // int
+        right:  p[1] >> 0, 
+        bottom: p[2] >> 0, 
+        left:   p[3] >> 0,
+      };
+    
+    };
+
     const prepareRowOptions = (row) => {
 
       // validate
@@ -211,6 +258,7 @@ class PDFDocumentWithTables extends PDFDocument {
     const computeRowHeight = (row) => {
       
       let result = 0;
+      let cellp;
 
       // if row is object, content with property and options
       if(!Array.isArray(row) && typeof row === 'object' && !row.hasOwnProperty('property')){
@@ -234,12 +282,14 @@ class PDFDocumentWithTables extends PDFDocument {
           cell.hasOwnProperty('options') && prepareRowOptions(cell);
         }
 
-        text = String(text).replace('bold:','');
+        text = String(text).replace('bold:','').replace('size','');
         
-        // calc
+        // cell padding
+        cellp = prepareCellPadding(table.headers[i].padding || options.padding || 0);
+
         // calc height size of string
         const cellHeight = this.heightOfString(text, {
-          width: columnSizes[i],
+          width: columnSizes[i] - (cellp.left + cellp.right),
           align: 'left',
         });
         
@@ -302,7 +352,7 @@ class PDFDocumentWithTables extends PDFDocument {
       this.logg('columnSizes', h);
       this.logg('columnPositions', p);
 
-    }
+    };
 
     calcColumnSizes();
 
@@ -349,8 +399,13 @@ class PDFDocumentWithTables extends PDFDocument {
             // add background
             this.addBackground(rectCell);
 
-            this.text(header, lastPositionX, startY, {
-              width: columnSizes[i] >> 0,
+            // cell padding
+            cellPadding = prepareCellPadding(options.padding || 0);
+
+            this.text(header, 
+              lastPositionX + (cellPadding.left), 
+              startY, {
+              width: Number(columnSizes[i]) - (cellPadding.left + cellPadding.right),
               align: 'left',
             });
             
@@ -363,10 +418,10 @@ class PDFDocumentWithTables extends PDFDocument {
           // Print all headers
           table.headers.forEach( (dataHeader, i) => {
 
-            let {label, width, renderer, align, headerColor, headerOpacity} = dataHeader;
+            let {label, width, renderer, align, headerColor, headerOpacity, headerAlign, padding} = dataHeader;
             // check defination
             width = width || columnSizes[i];
-            align = align || 'left';
+            align = headerAlign || align || 'left';
             // force number
             width = width >> 0;
     
@@ -386,9 +441,14 @@ class PDFDocumentWithTables extends PDFDocument {
             // add background
             this.addBackground(rectCell, headerColor, headerOpacity);
 
+            // cell padding
+            cellPadding = prepareCellPadding(padding || options.padding || 0);
+
             // write
-            this.text(label, lastPositionX, startY, {
-              width: width,
+            this.text(label, 
+              lastPositionX + (cellPadding.left), 
+              startY, {
+              width: width - (cellPadding.left + cellPadding.right),
               align: align,
             })
 
@@ -409,7 +469,7 @@ class PDFDocumentWithTables extends PDFDocument {
       // Separation line between headers and rows
       separationsRow(startX, rowBottomY);
 
-    }
+    };
 
     // End header
     addHeader();
@@ -443,11 +503,14 @@ class PDFDocumentWithTables extends PDFDocument {
       // Print all cells of the current row
       table.headers.forEach(( dataHeader, index) => {
 
-        let {property, width, renderer, align} = dataHeader;
+        let {property, width, renderer, align, padding} = dataHeader;
         
         // check defination
         width = width || columnWidth;
         align = align || 'left';
+
+        // cell padding
+        cellPadding = prepareCellPadding(padding || options.padding || 0);
 
         const rectCell = {
           x: lastPositionX,
@@ -503,10 +566,13 @@ class PDFDocumentWithTables extends PDFDocument {
           text = renderer(text, index, i, row, rectRow, rectCell); // value, index-column, index-row, row 
         }
 
-        this.text(text, lastPositionX, startY, {
-          width: width,
+        this.text(text, 
+          lastPositionX + (cellPadding.left), 
+          startY, {
+          width: width - (cellPadding.left + cellPadding.right),
           align: align,
         });
+        
         lastPositionX += width; 
 
         // set style
@@ -574,14 +640,20 @@ class PDFDocumentWithTables extends PDFDocument {
         // Allow the user to override style for rows
         prepareRow(row, index, i, rectRow);
 
-        // renderer column
         if(typeof table.headers[index] === 'object') {
+          // renderer column
           table.headers[index].renderer && (cell = table.headers[index].renderer(cell, index, i, row, rectRow, rectCell)); // text-cell, index-column, index-line, row
+          // align
           table.headers[index].align && (align = table.headers[index].align);
         }
 
-        this.text(cell, lastPositionX, startY, {
-          width: columnSizes[index],
+        // cell padding
+        cellPadding = prepareCellPadding(table.headers[index].padding || options.padding || 0);
+
+        this.text(cell, 
+          lastPositionX + (cellPadding.left), 
+          startY, {
+          width: columnSizes[index] - (cellPadding.left + cellPadding.right),
           align: align,
         });
 
