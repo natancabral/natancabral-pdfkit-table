@@ -1,3 +1,5 @@
+<img src="https://github.com/natancabral/natancabral-pdfkit-table/blob/main/example/logo.png"/>
+
 # natancabral-pdfkit-table
 
 #### Generate pdf tables with javascript (PDFKIT plugin)
@@ -482,7 +484,7 @@ datas: [
 ### 0.1.39
 
 + **addBackground**  <code>{Function}</code> - Add background peer line. 
-  - doc.addBackground( {x, y, width, height}, fillColor, opacity, fontColor );
+  - doc.addBackground( {x, y, width, height}, fillColor, opacity, callback );
 + **prepareRow**  <code>{Function}</code>
   - const options = { prepareRow: (row, indexColumn, indexRow, rectRow) => { indexColumn === 0 && doc.addBackground(rectRow, 'red', 0.5) } }
 
