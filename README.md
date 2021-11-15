@@ -1,4 +1,10 @@
-<img src="https://github.com/natancabral/natancabral-pdfkit-table/blob/main/example/logo.png"/>
+<p align="center">
+  <br/>
+  <br/>
+  <img src="https://github.com/natancabral/natancabral-pdfkit-table/blob/main/example/logo.png" alt="natancabral-pdfkit-table (Natan Cabral)"/>
+  <br/>
+  <br/>
+</p>
 
 # natancabral-pdfkit-table
 
@@ -41,9 +47,11 @@ npm install natancabral-pdfkit-table
     rows: [/* or simple data */],
   }
   // options
-  const options = {}
+  const options = {};
+  // callback
+  const callback = () => {};
   // the magic
-  doc.table( table, options );
+  doc.table( table, options, callback ); // is a Promise to async/await function 
 
   // done!
   doc.end();
@@ -218,11 +226,8 @@ doc.table( json, json.options || {} ) ;
     - headerColor <code>String</code>
     - headerOpacity <code>Number</code>
     - headerAlign <code>String</code>
-    - background <code>Object</code> sample: {"color": "grey", "opacity": 0.5}
-      - color: <code>String</code>
-      - opacity: <code>Number</code>
-    - backgroundColor <code>String</code> 'green'
-    - backgroundOpacity: <code>Number</code>
+    - columnColor or backgroundColor <code>String</code>
+    - columnOpacity or backgroundOpacity: <code>Number</code>
     - renderer <code>Function</code> function( value, indexColumn, indexRow, row, rectRow, rectCell ) { return value }
   - datas <code>Array.&lt;object&gt;</code>
   - rows <code>Array.[]</code>
@@ -241,9 +246,8 @@ doc.table( json, json.options || {} ) ;
 | **headerColor**      | <code>String</code>   | grey or #BEBEBE    | color of header   |
 | **headerOpacity**    | <code>Number</code>   | 0.5                | opacity of header |
 | **headerAlign**      | <code>String</code>   | left               | only header       |
-| **background**       | <code>Object</code>   | undefined          | background of column, sample: {"color": "grey", "opacity": 0.5}  |
-| **backgroundColor**  | <code>String</code>   | undefined          | color of column   |
-| **backgroundOpacity**| <code>Number</code>   | undefined          | opacity of column   |
+| **columnColor** or backgroundColor  | <code>String</code>   | undefined          | color of column   |
+| **columnOpacity** or backgroundOpacity| <code>Number</code>   | undefined          | opacity of column   |
 | **renderer**         | <code>Function</code> | Function           | function( value, indexColumn, indexRow, row, rectRow, rectCell ) { return value } |
 
 
@@ -386,6 +390,30 @@ datas: [
 - margin: marginBottom before, marginTop after
 
 ## Changelogs
+
+### 0.1.68
+
++ added ***Promise***. table is a Promise();
+  - Async/Await function 
+```js
+;(async function(){
+  // create document
+  const doc = new PDFDocument({ margin: 30, });
+  // to save on server
+  doc.pipe(fs.createWriteStream("./my-table.pdf"));
+  // tables
+  await doc.table(table, options);
+  await doc.table(table, options);
+  await doc.table(table, options);
+  // done
+  doc.end();
+})();
+```
+
++ added ***callback***. 
+```js
+  doc.table(table, options, callback);
+```
 
 ### 0.1.63
 
@@ -557,6 +585,4 @@ The MIT License.
 ## Thank you
 
 - pdfkit - [pdfkit](https://www.npmjs.com/package/pdfkit)
-- code base - [andronio](https://www.andronio.me/2017/09/02/natancabral-pdfkit-tables/)
 - ideas - [giuseppe-santoro](https://github.com/foliojs/pdfkit/issues/29#issuecomment-56504943)
-- influence [voilab](https://github.com/voilab/voilab-pdf-table)
