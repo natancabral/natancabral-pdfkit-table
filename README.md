@@ -1,12 +1,12 @@
 <p align="center">
   <br/>
   <br/>
-  <img src="https://github.com/natancabral/pdfkit-table/blob/main/example/logo.png" alt="pdfkit-table (Natan Cabral)"/>
+  <img src="https://github.com/natancabral/natancabral-pdfkit-table/blob/main/example/logo.png" alt="natancabral-pdfkit-table (Natan Cabral)"/>
   <br/>
   <br/>
 </p>
 
-# pdfkit-table
+# natancabral-pdfkit-table
 
 #### Generate pdf tables with javascript (PDFKIT plugin)
 Helps to draw informations in simple tables using pdfkit. #server-side.
@@ -14,26 +14,26 @@ Helps to draw informations in simple tables using pdfkit. #server-side.
 
 ## Examples
 
-[view pdf example](https://github.com/natancabral/pdfkit-table/raw/main/example/document.pdf) | 
-[color pdf](https://github.com/natancabral/pdfkit-table/raw/main/example/document-color.pdf) | 
-[full code example](https://github.com/natancabral/pdfkit-table/blob/main/example/index-example.js) |
-[server example](https://github.com/natancabral/pdfkit-table/blob/main/example/index-server-example.js) |
-[json example](https://github.com/natancabral/pdfkit-table/blob/main/example/index-json-example.js) |
-[all](https://github.com/natancabral/pdfkit-table/blob/main/example/)
+[view pdf example](https://github.com/natancabral/natancabral-pdfkit-table/raw/main/example/document.pdf) | 
+[color pdf](https://github.com/natancabral/natancabral-pdfkit-table/raw/main/example/document-color.pdf) | 
+[full code example](https://github.com/natancabral/natancabral-pdfkit-table/blob/main/example/index-example.js) |
+[server example](https://github.com/natancabral/natancabral-pdfkit-table/blob/main/example/index-server-example.js) |
+[json example](https://github.com/natancabral/natancabral-pdfkit-table/blob/main/example/index-json-example.js) |
+[all](https://github.com/natancabral/natancabral-pdfkit-table/blob/main/example/)
 
-<img src="https://github.com/natancabral/pdfkit-table/blob/main/example/pdf-sample.png"/>
+<img src="https://github.com/natancabral/natancabral-pdfkit-table/blob/main/example/pdf-sample.png"/>
 
 ## Install
 
 ```bash
-npm install pdfkit-table
+npm install natancabral-pdfkit-table
 ```
 
 ## Use
 
 ```js
   const fs = require("fs");
-  const PDFDocument = require("pdfkit-table");
+  const PDFDocument = require("natancabral-pdfkit-table");
   const doc = new PDFDocument({ margin: 30, size: 'A4' });
   
   // file name
@@ -198,7 +198,7 @@ doc.table( json, json.options || {} ) ;
 ```js
   // require
   const fs = require("fs");
-  const PDFDocument = require("pdfkit-table");
+  const PDFDocument = require("natancabral-pdfkit-table");
   const doc = new PDFDocument({ margin: 30, size: 'A4', });
   // file name
   doc.pipe(fs.createWriteStream("./file-table.pdf"));
@@ -379,7 +379,7 @@ datas: [
 
 ## ToDo
 
-- [Suggestions / Issues / Fixes](https://github.com/natancabral/pdfkit-table/issues)
+- [Suggestions / Issues / Fixes](https://github.com/natancabral/natancabral-pdfkit-table/issues)
 - striped {Boolean} (corsimcornao)
 - colspan - the colspan attribute defines the number of columns a table cell should span.
 - sample with database
@@ -551,10 +551,10 @@ datas: [
 ### 0.1.33
 
 + Function **tableToJson**
-  - import {tableToJson} from 'pdfkit-table';
+  - import {tableToJson} from 'natancabral-pdfkit-table';
   - const table = tableToJson('#id_table'); <code>{Object}</code>
 + Function **allTablesToJson**
-  - import {allTablesToJson} from 'pdfkit-table';
+  - import {allTablesToJson} from 'natancabral-pdfkit-table';
   - const tables = allTablesToJson(); <code>{Array}</code>
 
 ### 0.1.32

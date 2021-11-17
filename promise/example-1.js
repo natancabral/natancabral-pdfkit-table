@@ -1,7 +1,7 @@
 /**
  * You need to install on terminal (node.js):
  * -----------------------------------------------------
- * $ npm install pdfkit-table
+ * $ npm install natancabral-pdfkit-table
  * -----------------------------------------------------
  * Run this file:
  * -----------------------------------------------------
@@ -13,7 +13,7 @@
 const fs = require("fs");
 // const PDFDocument = require("../index");
 // const PDFDocument = require("./index-back-padding-version");
-const PDFDocument = require("./pdfkit-table-promise");
+const PDFDocument = require("./natancabral-pdfkit-table-promise");
 const doc = new PDFDocument({
   margin: 30, 
 });

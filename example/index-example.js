@@ -1,7 +1,7 @@
 /**
  * You need to install on terminal (node.js):
  * -----------------------------------------------------
- * $ npm install pdfkit-table
+ * $ npm install natancabral-pdfkit-table
  * -----------------------------------------------------
  * Run this file:
  * -----------------------------------------------------
