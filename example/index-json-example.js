@@ -1,7 +1,7 @@
 /**
  * You need to install on terminal (node.js):
  * -----------------------------------------------------
- * $ npm install natancabral-pdfkit-table
+ * $ npm install pdfkit-table
  * -----------------------------------------------------
  * Run this file:
  * -----------------------------------------------------
@@ -11,7 +11,7 @@
  */
 
 const fs = require("fs");
-const PDFDocument = require("natancabral-pdfkit-table");
+const PDFDocument = require("../index");
 const doc = new PDFDocument({
   margin: 30, 
 });
@@ -20,7 +20,7 @@ const doc = new PDFDocument({
 const json = require("./table.json");
 
 // to save on server
-doc.pipe(fs.createWriteStream("./document.pdf"));
+doc.pipe(fs.createWriteStream("./document-json.pdf"));
 
 // if json file is array
 Array.isArray(json) ? 

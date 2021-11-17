@@ -1,7 +1,7 @@
 /**
  * You need to install on terminal (node.js):
  * -----------------------------------------------------
- * $ npm install express cors natancabral-pdfkit-table
+ * $ npm install express cors pdfkit-table
  * -----------------------------------------------------
  * Run this file:
  * -----------------------------------------------------
@@ -22,7 +22,7 @@ app.listen(3030, function () {
 app.get("/", function (req, res) {
 
   const fs = require("fs");
-  const PDFDocument = require("natancabral-pdfkit-table");
+  const PDFDocument = require("../index");
   const doc = new PDFDocument({
     margin: 30, 
   });
