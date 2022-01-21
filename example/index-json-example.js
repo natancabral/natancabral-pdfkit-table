@@ -11,11 +11,10 @@
  */
 
 const fs = require("fs");
-const PDFDocument = require("../index");
-const doc = new PDFDocument({
-  margin: 30, 
-});
+const PDFDocument = require("natancabral-pdfkit-table");
 
+// start pdf document
+let doc = new PDFDocument({ margin: 30, size: 'A4' });
 // load json file
 const json = require("./table.json");
 

@@ -22,11 +22,10 @@ app.listen(3030, function () {
 app.get("/", function (req, res) {
 
   const fs = require("fs");
-  const PDFDocument = require("../index");
-  const doc = new PDFDocument({
-    margin: 30, 
-  });
+  const PDFDocument = require("natancabral-pdfkit-table");
 
+  // start pdf document
+  let doc = new PDFDocument({ margin: 30, size: 'A4' });
   // to save on server
   doc.pipe(fs.createWriteStream("./document.pdf"));
 

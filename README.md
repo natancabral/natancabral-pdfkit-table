@@ -23,7 +23,7 @@ Helps to draw informations in simple tables using pdfkit. #server-side.
 
 <img src="https://github.com/natancabral/natancabral-pdfkit-table/blob/main/example/pdf-sample.png"/>
 
-## Install
+## Install [<img src="https://github.com/natancabral/natancabral-pdfkit-table/blob/main/example/npm-tile.png">](https://www.npmjs.com/package/natancabral-pdfkit-table)
 
 ```bash
 npm install natancabral-pdfkit-table
@@ -32,30 +32,46 @@ npm install natancabral-pdfkit-table
 ## Use
 
 ```js
+  // requires
   const fs = require("fs");
-  const PDFDocument = require("natancabral-pdfkit-table");
-  const doc = new PDFDocument({ margin: 30, size: 'A4' });
-  
+  const PDFDocument = require("natancabral-pdfkit-table");  
+
+  // create document
+  let doc = new PDFDocument({ margin: 30, size: 'A4' });
   // file name
-  doc.pipe(fs.createWriteStream("./file-table.pdf"));
+  doc.pipe(fs.createWriteStream("./document.pdf"));
   
   // table
   const table = { 
     title: '',
     headers: [],
-    datas: [/* complex data */],
-    rows: [/* or simple data */],
+    datas: [ /* complex data */ ],
+    rows: [ /* or simple data */ ],
   }
-  // options
-  const options = {};
-  // callback
-  const callback = () => {};
   // the magic
-  doc.table( table, options, callback ); // is a Promise to async/await function 
+  doc.table( table, { /* options */ }, () => { /* callback */ } );
+  // doc.table() is a Promise to async/await function 
+
+  // if your run express.js server
+  // to show PDF on navigator
+  // doc.pipe(res);
 
   // done!
   doc.end();
 
+```
+
+## Server response
+[server example](https://github.com/natancabral/natancabral-pdfkit-table/blob/main/example/index-server-example.js)
+```js
+  app.get('/create-pdf', (req, res) => {
+    // ...table code
+    // if your run express.js server
+    // to show PDF on navigator
+    doc.pipe(res);
+    // done!
+    doc.end();
+  });
 ```
 
 ### Example 1 - Simple Array
@@ -97,6 +113,7 @@ npm install natancabral-pdfkit-table
         renderer: (value, indexColumn, indexRow, row) => { return `U$ ${Number(value).toFixed(2)}` } 
       },
     ],
+    // complex data
     datas: [
       { 
         name: 'Name 1', 
@@ -111,21 +128,15 @@ npm install natancabral-pdfkit-table
         name: 'bold:Name 2', 
         description: 'bold:Lorem ipsum dolor.', 
         price1: 'bold:$1', 
-        price3: '$3', 
-        price2: '$2', 
-        price4: '4', 
-      },
-      { 
-        name: 'Name 3', 
-        description: 'Lorem ipsum dolor.', 
-        price1: 'bold:$1', 
-        price4: '4', 
-        price2: '$2', 
         price3: { 
           label: 'PRICE $3', options: { fontSize: 12 } 
         }, 
+        price2: '$2', 
+        price4: '4', 
       },
+      // {...},
     ],
+    // simeple data
     rows: [
       [
         "Apple",
@@ -135,20 +146,13 @@ npm install natancabral-pdfkit-table
         "$ 105,99",
         "105.99",
       ],
-      [
-        "Tire",
-        "Donec ac tincidunt nisi, sit amet tincidunt mauris. Fusce venenatis tristique quam, nec rhoncus eros volutpat nec. Donec fringilla ut lorem vitae maximus. Morbi ex erat, luctus eu nulla sit amet, facilisis porttitor mi.",
-        "$ 105,99",
-        "$ 105,99",
-        "$ 105,99",
-        "105.99",
-      ],
+      // [...],
     ],
   };
 
   doc.table(table, {
     prepareHeader: () => doc.font("Helvetica-Bold").fontSize(8),
-    prepareRow: (row, indexColumn, indexRow, rectRow) => {
+    prepareRow: (row, indexColumn, indexRow, rectRow, rectCell) => {
       doc.font("Helvetica").fontSize(8);
       indexColumn === 0 && doc.addBackground(rectRow, 'blue', 0.15);
     },
@@ -182,7 +186,8 @@ const tableJson = '{
 doc.table( tableJson );
 ```
 
-or
+### Example 4 - Json file (many tables)
+
 
 ```js
 const json = require('./table.json');
@@ -192,26 +197,6 @@ Array.isArray(json) ?
 json.forEach( table => doc.table( table, table.options || {} ) ) : 
 // one table
 doc.table( json, json.options || {} ) ;
-```
-
-### Example 4 - Full Code
-```js
-  // require
-  const fs = require("fs");
-  const PDFDocument = require("natancabral-pdfkit-table");
-  const doc = new PDFDocument({ margin: 30, size: 'A4', });
-  // file name
-  doc.pipe(fs.createWriteStream("./file-table.pdf"));
-
-  // ------------------
-  // table code here
-  // ------------------
-
-  // if your run express.js server:
-  // HTTP response only to show pdf
-  doc.pipe(res);
-  // done
-  doc.end();
 ```
 
 ## Table
@@ -251,7 +236,8 @@ doc.table( json, json.options || {} ) ;
 | **renderer**         | <code>Function</code> | Function           | function( value, indexColumn, indexRow, row, rectRow, rectCell ) { return value } |
 
 
-Example code:
+#### Simple headers example
+
 ```js
 const table = {
   // simple headers only with ROWS (not DATAS)  
@@ -262,7 +248,11 @@ const table = {
     ['Maria', '30'], // row 2
   ]
 };
+```
 
+#### Complex headers example
+
+```js
 const table = {
   // complex headers work with ROWS and DATAS  
   headers: [
@@ -293,15 +283,16 @@ const table = {
 | **width**            | <code>Number</code>   | undefined          | width of table    |
 | **x**                | <code>Number</code>   | undefined / doc.x  | position x (left) |
 | **y**                | <code>Number</code>   | undefined / doc.y  | position y (top)  |
-| **divider**          | <code>Object</code>   | undefined          | define divider lines      |
+| **divider**          | <code>Object</code>   | undefined          | define divider lines |
 | **columnsSize**      | <code>Array</code>    | undefined          | define sizes      |
 | **columnSpacing**    | <code>Number</code>   | 5                  |                   |
 | **addPage**          | <code>Boolean</code>  | false              | add table on new page |
 | **prepareHeader**    | <code>Function</code> | Function           | ()                  |
-| **prepareRow**       | <code>Function</code> | Function           | (row, indexColumn, indexRow, rectRow) => {} |
+| **prepareRow**       | <code>Function</code> | Function           | (row, indexColumn, indexRow, rectRow, rectCell) => {} |
 
 
-Example code:
+#### Options example
+
 ```js
 const options = {
   // properties
@@ -314,10 +305,11 @@ const options = {
     header: {disabled: false, width: 2, opacity: 1},
     horizontal: {disabled: false, width: 0.5, opacity: 0.5},
   },
+  padding: 5, // {Number} default: 0
   columnSpacing: 5, // {Number} default: 5
   // functions
   prepareHeader: () => doc.font("Helvetica-Bold").fontSize(8), // {Function} 
-  prepareRow: (row, indexColumn, indexRow, rectRow) => doc.font("Helvetica").fontSize(8), // {Function} 
+  prepareRow: (row, indexColumn, indexRow, rectRow, rectCell) => doc.font("Helvetica").fontSize(8), // {Function} 
 }
 ```
 
@@ -391,6 +383,13 @@ datas: [
 - margin: marginBottom before, marginTop after
 
 ## Changelogs
+
+### 0.1.83
+
+- Avoid a table title appearing alone
+  - Thanks Alexis Arriola ***@AlexisArriola***
+- Problem with long text in cell spreading on several pages
+  - Thanks Ed ***@MeMineToMe***
 
 ### 0.1.72
 
@@ -534,7 +533,7 @@ datas: [
 + **addBackground**  <code>{Function}</code> - Add background peer line. 
   - doc.addBackground( {x, y, width, height}, fillColor, opacity, callback );
 + **prepareRow**  <code>{Function}</code>
-  - const options = { prepareRow: (row, indexColumn, indexRow, rectRow) => { indexColumn === 0 && doc.addBackground(rectRow, 'red', 0.5) } }
+  - const options = { prepareRow: (row, indexColumn, indexRow, rectRow, rectCell) => { indexColumn === 0 && doc.addBackground(rectRow, 'red', 0.5) } }
 
 ### 0.1.38
 
