@@ -25,6 +25,8 @@ Helps to draw informations in simple tables using pdfkit. #server-side.
 
 ## Install [<img src="https://github.com/natancabral/natancabral-pdfkit-table/blob/main/example/npm-tile.png">](https://www.npmjs.com/package/natancabral-pdfkit-table)
 
+[![NPM](https://nodei.co/npm/natancabral-pdfkit-table.png)](https://www.npmjs.com/package/natancabral-pdfkit-table)
+
 ```bash
 npm install natancabral-pdfkit-table
 ```
@@ -216,8 +218,8 @@ doc.table( json, json.options || {} ) ;
     - renderer <code>Function</code> function( value, indexColumn, indexRow, row, rectRow, rectCell ) { return value }
   - datas <code>Array.&lt;object&gt;</code>
   - rows <code>Array.[]</code>
-  - title <code>String</code>
-  - subtitle <code>String</code>
+  - title <code>String</code> || <code>Object</code>
+  - subtitle <code>String</code> || <code>Object</code>
 
 ### Headers
 
@@ -278,8 +280,8 @@ const table = {
 
 | Properties           | Type                  | Default            | Description       |
 -----------------------|-----------------------|--------------------|-------------------|
-| **title**            | <code>String</code>   | undefined          | title             |
-| **subtitle**         | <code>String</code>   | undefined          | subtitle          |
+| **title**            | <code>String | Object</code>   | undefined          | title             |
+| **subtitle**         | <code>String | Object</code>   | undefined          | subtitle          |
 | **width**            | <code>Number</code>   | undefined          | width of table    |
 | **x**                | <code>Number</code>   | undefined / doc.x  | position x (left) |
 | **y**                | <code>Number</code>   | undefined / doc.y  | position y (top)  |
@@ -287,17 +289,17 @@ const table = {
 | **columnsSize**      | <code>Array</code>    | undefined          | define sizes      |
 | **columnSpacing**    | <code>Number</code>   | 5                  |                   |
 | **addPage**          | <code>Boolean</code>  | false              | add table on new page |
+| **hideHeader**       | <code>Boolean</code>  | false              | hide header |
 | **prepareHeader**    | <code>Function</code> | Function           | ()                  |
 | **prepareRow**       | <code>Function</code> | Function           | (row, indexColumn, indexRow, rectRow, rectCell) => {} |
-
 
 #### Options example
 
 ```js
 const options = {
   // properties
-  title: "Title",
-  subtitle: "Subtitle",
+  title: "Title", // { label: 'Title', fontSize: 30, color: 'blue', fontFamily: "./fonts/type.ttf" },
+  subtitle: "Subtitle", // { label: 'Subtitle', fontSize: 20, color: 'green', fontFamily: "./fonts/type.ttf" },
   width: 500, // {Number} default: undefined // A4 595.28 x 841.89 (portrait) (about width sizes)
   x: 0, // {Number} default: undefined | doc.x
   y: 0, // {Number} default: undefined | doc.y
@@ -307,6 +309,7 @@ const options = {
   },
   padding: 5, // {Number} default: 0
   columnSpacing: 5, // {Number} default: 5
+  hideHeader: false, 
   // functions
   prepareHeader: () => doc.font("Helvetica-Bold").fontSize(8), // {Function} 
   prepareRow: (row, indexColumn, indexRow, rectRow, rectCell) => doc.font("Helvetica").fontSize(8), // {Function} 
@@ -383,6 +386,27 @@ datas: [
 - margin: marginBottom before, marginTop after
 
 ## Changelogs
+
+### 0.1.88
+
+- Fix header font family or title object
+  - Thanks ***@RastaGrzywa***
+```js
+let localType = "./font/Montserrat-Regular.ttf";
+const table = {
+  title: { label: 'Title Object 2', fontSize: 30, color: 'blue', fontFamily: localType },
+}
+```
+
+### 0.1.87
+
+- Add options hideHeader
+  - Thanks Ville ***@VilleKoo***
+```js
+  options: {
+    hideHeader: true,
+  }
+```
 
 ### 0.1.83
 
