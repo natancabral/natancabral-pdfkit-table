@@ -1,7 +1,8 @@
 {
   "name": "natancabral-pdfkit-table",
-  "version": "0.1.88",
-  "description": "PdfKit Table. Helps to draw informations in simple tables using pdfkit. #server-side. Generate pdf tables with javascript (PDFKIT plugin) ",
+  "version": "0.1.90",
+  "deprecated": "Deprecated. Please use pdfkit-table: https://www.npmjs.com/package/pdfkit-table",
+  "description": "Deprecated. Please use pdfkit-table: https://www.npmjs.com/package/pdfkit-table",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
