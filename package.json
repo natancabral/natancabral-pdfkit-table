@@ -1,17 +1,34 @@
 {
   "name": "natancabral-pdfkit-table",
-  "version": "0.1.90",
-  "deprecated": "Deprecated. Please use pdfkit-table: https://www.npmjs.com/package/pdfkit-table",
-  "description": "Deprecated. Please use pdfkit-table: https://www.npmjs.com/package/pdfkit-table",
+  "version": "0.2.11",
+  "description": "PdfKit Table. Helps to draw informations in simple tables using pdfkit. #server-side. Generate pdf tables with TypeScript / JavaScript (PDFKIT plugin)",
   "main": "index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./index.js"
+    }
+  },
+  "files": [
+    "index.js",
+    "dist",
+    "LICENSE",
+    "README.md"
+  ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "git-push": "git add . && git commit -m 'update' && git push "
+    "build": "tsc",
+    "prepublishOnly": "npm run build",
+    "test": "npm run build && node --test ./tests/*.test.js",
+    "examples": "npm run build && NODE_PATH=.. node example/index.js",
+    "examples-legacy": "npm run build && NODE_PATH=.. node .legacy/index.js",
+    "git-push": "git add . && git commit -m 'update' && git push ",
+    "npm-publish": "npm run build && npm publish"
   },
   "repository": "git+https://github.com/natancabral/natancabral-pdfkit-table.git",
   "author": "natancabral",
   "keywords": [
-    "javascript",
+    "typescript",
     "node",
     "nodejs",
     "node pdf",
@@ -27,6 +44,11 @@
   },
   "homepage": "https://github.com/natancabral/natancabral-pdfkit-table#readme",
   "dependencies": {
-    "pdfkit": "latest"
+    "pdfkit": "^0.18.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/pdfkit": "^0.17.6",
+    "typescript": "^6.0.3"
   }
 }

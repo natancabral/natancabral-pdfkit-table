@@ -1,6 +1,13 @@
 node_modules
-local-example
-promise
+example-test
+example-promise
+
+.back
+.backs
+.ideas
 
 package-lock.json
 pdfkit-guide.pdf
+
+dist/
+
